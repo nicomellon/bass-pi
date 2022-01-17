@@ -16,6 +16,7 @@ func PostBasses(ctx *gin.Context) {
 
 	// Call BindJSON to bind the received JSON to newBass.
 	if err := ctx.BindJSON(&newBass); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

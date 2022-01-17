@@ -1,6 +1,6 @@
 # Bass-PI
 
-Bass-PI is a RESTful API built in Go
+Bass-PI is a RESTful API built in Go with the Gin framework
 
 # Routes
 
