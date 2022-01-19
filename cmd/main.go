@@ -10,8 +10,8 @@ func main() {
 	router := gin.Default()
 	router.GET("/basses", handlers.GetAllBasses)
 	// router.GET("/basses/random", handlers.GetRandomBass)
-	router.GET("/basses/:id", handlers.GetBassByID)
-	router.POST("/basses", handlers.PostBasses)
+	// TODO router.GET("/basses/:id", handlers.GetBassByID)
+	// TODO router.POST("/basses", handlers.PostBasses)
 	// router.PUT("/basses/:id", handlers.UpdateBassByID)
 	// router.DELETE("/basses/:id", handlers.DeleteBassByID)
 
