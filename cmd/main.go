@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"net/http"
+
+	"github.com/gorilla/mux"
 
 	"github.com/nicomellon/bass-pi/pkg/handlers"
 	"github.com/nicomellon/bass-pi/pkg/sqldb"
@@ -10,8 +12,8 @@ import (
 func main() {
 	sqldb.ConnectDB()
 
-	router := gin.Default()
-	router.GET("/basses", handlers.GetAllBasses)
+	router := mux.NewRouter()
+	router.HandleFunc("/basses", handlers.GetAllBasses)
 	// router.GET("/basses/random", handlers.GetRandomBass)
 	// TODO router.GET("/basses/:id", handlers.GetBassByID)
 	// TODO router.POST("/basses", handlers.PostBasses)
@@ -25,5 +27,5 @@ func main() {
 	// router.PUT("/manufacturers/:id", handlers.UpdateManufacturerByID)
 	// router.DELETE("/manufacturers/:id", handlers.DeleteManufacturerByID)
 	
-	router.Run("localhost:8080")
+	http.ListenAndServe(":8080", router)
 }
