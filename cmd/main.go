@@ -4,9 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/nicomellon/bass-pi/pkg/handlers"
+	"github.com/nicomellon/bass-pi/pkg/sqldb"
 )
 
 func main() {
+	sqldb.ConnectDB()
+
 	router := gin.Default()
 	router.GET("/basses", handlers.GetAllBasses)
 	// router.GET("/basses/random", handlers.GetRandomBass)

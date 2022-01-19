@@ -7,31 +7,18 @@ import (
 
 	"github.com/nicomellon/bass-pi/pkg/models"
 
-	"fmt"
-
-	"database/sql"
-
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/nicomellon/bass-pi/pkg/sqldb"
 )
 
 // GetAllBasses responds with the list of all basses as JSON.
 func GetAllBasses(ctx *gin.Context) {
-	fmt.Println("Attempting to connect to database...")
-
-	db, err := sql.Open("mysql", "admin:12341234@tcp(database-1.chdxg6xj6r67.eu-central-1.rds.amazonaws.com:3306)/bass_pi")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	fmt.Println("Successfully connected to database")
-	defer db.Close()
 
 	q := `
 		SELECT id, name 
 		FROM basses;
 	`
 
-	rows, err := db.Query(q)
+	rows, err := sqldb.DB.Query(q)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -49,6 +36,5 @@ func GetAllBasses(ctx *gin.Context) {
 		basses = append(basses, bass.Name)		
 	}
 	
-	fmt.Println("Database connection closed")
 	ctx.IndentedJSON(http.StatusOK, basses)
 }
