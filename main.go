@@ -43,8 +43,19 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/api/manufacturers", handlers.GetManufacturers(db))
-	r.GET("/api/manufacturers/:id", handlers.GetManufacturerByID(db))
+	// manufacturers routes
+	m := r.Group("/api/manufacturers")
+	{
+		m.GET("/", handlers.GetManufacturers(db))
+		m.POST("/", handlers.PostManufacturer(db))
+		m.GET("/:id", handlers.GetManufacturerByID(db))
+	}
 
+	// basses routes
+	// b := r.Group("/api/basses")
+	{
+		// b.GET("/", handlers.GetBasses(db))
+	}
+	
 	r.Run()
 }
