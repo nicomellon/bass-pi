@@ -21,12 +21,12 @@ func GetManufacturers(db *sql.DB) gin.HandlerFunc {
 	
 		var manufacturers []models.Manufacturer
 		for rows.Next() {
-			var manufacturer models.Manufacturer
-			err = rows.Scan(&manufacturer.ID, &manufacturer.Name, &manufacturer.FoundedYear, &manufacturer.Nationality, &manufacturer.Logo) // alguna manera mejor de hacer esto?
+			var mfct models.Manufacturer
+			err = rows.Scan(&mfct.ID, &mfct.Name, &mfct.FoundedYear, &mfct.Nationality, &mfct.Logo) // alguna manera mejor de hacer esto?
 			if err != nil {
 				panic(err)
 			}
-			manufacturers = append(manufacturers, manufacturer)
+			manufacturers = append(manufacturers, mfct)
 		}
 		c.JSON(http.StatusOK, manufacturers)
 	}

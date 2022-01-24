@@ -15,6 +15,8 @@ var db *sql.DB
 
 func main() {
 
+	// me gustaria mover la conexión a la DB a otro archivo
+
 	// Capture connection properties.
     cfg := mysql.Config{
         User:   os.Getenv("DBUSER"),
@@ -42,6 +44,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/api/manufacturers", handlers.GetManufacturers(db))
+	r.GET("/api/manufacturers/:id", handlers.GetManufacturerByID(db))
 
 	r.Run()
 }
