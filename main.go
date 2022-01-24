@@ -18,28 +18,26 @@ func main() {
 	// me gustaria mover la conexión a la DB a otro archivo
 
 	// Capture connection properties.
-    cfg := mysql.Config{
-        User:   os.Getenv("DBUSER"),
-        Passwd: os.Getenv("DBPASS"),
-        Net:    "tcp",
-        Addr:   "database-1.chdxg6xj6r67.eu-central-1.rds.amazonaws.com:3306",
-        DBName: "bass_pi",
+	cfg := mysql.Config{
+		User:                 os.Getenv("DBUSER"),
+		Passwd:               os.Getenv("DBPASS"),
+		Net:                  "tcp",
+		Addr:                 "database-1.chdxg6xj6r67.eu-central-1.rds.amazonaws.com:3306",
+		DBName:               "bass_pi",
 		AllowNativePasswords: true,
-    }
-    // Get a database handle.
-    var err error
-    db, err = sql.Open("mysql", cfg.FormatDSN())
-    if err != nil {
-        log.Fatal(err)
-    }
+	}
+	// Get a database handle.
+	var err error
+	db, err = sql.Open("mysql", cfg.FormatDSN())
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    pingErr := db.Ping()
-    if pingErr != nil {
-        log.Fatal(pingErr)
-    }
-    fmt.Println("Connected!")
-
-
+	pingErr := db.Ping()
+	if pingErr != nil {
+		log.Fatal(pingErr)
+	}
+	fmt.Println("Connected!")
 
 	r := gin.Default()
 
@@ -52,10 +50,10 @@ func main() {
 	}
 
 	// basses routes
-	// b := r.Group("/api/basses")
+	b := r.Group("/api/basses")
 	{
-		// b.GET("/", handlers.GetBasses(db))
+		b.GET("/", handlers.GetBasses(db))
 	}
-	
+
 	r.Run()
 }
