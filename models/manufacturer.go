@@ -9,3 +9,4 @@ type Manufacturer struct {
 	Nationality string         `json:"nationality"`
 	Logo        sql.NullString `json:"logo"`
 }
+
